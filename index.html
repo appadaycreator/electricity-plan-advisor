@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>電力会社・プラン最適診断 | 夜間割引・再エネ・フラット型を比較して節約</title>
+<meta name="description" content="使用量・家族構成・生活パターンから最適な電力会社とプランを診断。夜間割引型・フラット型・再生可能エネルギー型など年間節約額を試算します。">
+<link rel="canonical" href="https://appadaycreator.github.io/electricity-plan-advisor/">
+<meta property="og:title" content="電力会社・プラン最適診断 | 最適なプランで年間節約">
+<meta property="og:description" content="使用量・家族構成・生活パターンから最適な電力プランを診断。年間節約額も試算！">
+<meta property="og:url" content="https://appadaycreator.github.io/electricity-plan-advisor/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "電力会社・プラン最適診断",
+  "url": "https://appadaycreator.github.io/electricity-plan-advisor/",
+  "description": "使用量・家族構成・生活パターンから最適な電力会社とプランを診断",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}
+}
+</script>
+<!-- GTM -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TXQGZRF9');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8427583028015858" crossorigin="anonymous"></script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","s3t9vl8h3v");</script>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-yellow-50 to-orange-50 min-h-screen">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXQGZRF9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>
+window.onerror=function(m,s,l,c,e){console.warn('Error:',m);return true;};
+window.addEventListener('unhandledrejection',function(e){console.warn('Rejection:',e.reason);});
+</script>
+
+<div class="max-w-2xl mx-auto px-4 py-6">
+  <div class="text-center mb-6">
+    <h1 class="text-2xl font-bold text-orange-700 mb-2">⚡ 電力会社・プラン最適診断</h1>
+    <p class="text-gray-600 text-sm">あなたの生活パターンに合った最適な電力プランを診断します</p>
+  </div>
+
+  <div class="mb-4 text-center">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8427583028015858" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div id="quizArea" class="bg-white rounded-2xl shadow-lg p-6">
+    <div class="mb-4">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-sm text-gray-500">質問 <span id="qNum">1</span>/8</span>
+        <span class="text-sm text-orange-600 font-medium"><span id="qPct">12</span>%</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-2">
+        <div id="progressBar" class="bg-orange-500 h-2 rounded-full transition-all duration-500" style="width:12%"></div>
+      </div>
+    </div>
+    <div id="questionContainer"></div>
+    <div class="flex gap-3 mt-4">
+      <button id="backBtn" onclick="prevQ()" class="hidden flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors">← 戻る</button>
+      <button onclick="nextQ()" class="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl transition-colors">次へ →</button>
+    </div>
+  </div>
+
+  <div id="resultArea" class="hidden">
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-4">
+      <div class="text-center mb-4">
+        <div class="text-5xl mb-2" id="rEmoji">⚡</div>
+        <h2 class="text-xl font-bold text-gray-800 mb-1">電力プラン診断結果</h2>
+        <div class="inline-block px-4 py-1 rounded-full text-sm font-bold mb-2" id="rBadge"></div>
+      </div>
+
+      <div class="bg-orange-50 rounded-xl p-4 mb-4">
+        <h3 class="font-bold text-orange-800 mb-2">💡 推奨プランタイプ</h3>
+        <p class="text-sm text-orange-700 font-bold mb-1" id="planType"></p>
+        <p class="text-sm text-orange-600" id="planDesc"></p>
+      </div>
+
+      <div class="bg-green-50 rounded-xl p-4 mb-4">
+        <h3 class="font-bold text-green-800 mb-2">💰 年間節約見込み額</h3>
+        <div class="text-3xl font-bold text-green-600 mb-1" id="savingAmount"></div>
+        <p class="text-xs text-green-600" id="savingNote"></p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4 mb-4">
+        <h3 class="font-bold text-gray-800 mb-2">📋 乗り換えチェックリスト</h3>
+        <div id="checkList" class="text-sm text-gray-700 space-y-1"></div>
+      </div>
+
+      <div class="border border-orange-200 rounded-xl p-4 bg-orange-50 mb-4">
+        <p class="text-sm font-bold text-orange-700 mb-2">🔌 節電グッズで更に節約！</p>
+        <a href="https://www.amazon.co.jp/s?k=節電グッズ+スマートプラグ&tag=appadaycrea0f-22" target="_blank" class="block bg-orange-500 hover:bg-orange-600 text-white text-center py-2 px-4 rounded-lg text-sm font-medium mb-2">
+          🛒 Amazon で節電グッズを探す
+        </a>
+        <a href="https://px.a8.net/svt/ejp?a8mat=4AVCO8+3ORU2Y+5JTC+5YRHE" target="_blank" rel="nofollow" class="block bg-green-500 hover:bg-green-600 text-white text-center py-2 px-4 rounded-lg text-sm font-medium">
+          📖 ヨンデミーで節約術を学ぶ
+        </a>
+        <img src="https://www11.a8.net/0.gif?a8mat=4AVCO8+3ORU2Y+5JTC+5YRHE" width="1" height="1" style="display:none" alt="">
+      </div>
+
+      <button onclick="restart()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl transition-colors">
+        🔄 もう一度診断する
+      </button>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-4">
+      <h3 class="text-sm font-bold text-gray-700 mb-3">🔗 関連サービス</h3>
+      <div class="grid grid-cols-1 gap-2">
+        <a href="https://appadaycreator.github.io/electricity-cost-advisor/" class="flex items-center p-2 bg-gray-50 rounded-lg hover:bg-gray-100">
+          <span class="text-lg mr-2">💡</span><span class="text-sm text-gray-700">電気代削減アドバイザー</span>
+        </a>
+        <a href="https://appadaycreator.github.io/solar-panel-advisor/" class="flex items-center p-2 bg-gray-50 rounded-lg hover:bg-gray-100">
+          <span class="text-lg mr-2">☀️</span><span class="text-sm text-gray-700">太陽光発電診断</span>
+        </a>
+        <a href="https://appadaycreator.github.io/home-energy-advisor/" class="flex items-center p-2 bg-gray-50 rounded-lg hover:bg-gray-100">
+          <span class="text-lg mr-2">🏠</span><span class="text-sm text-gray-700">家庭エネルギーアドバイザー</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {id:'bill', q:'Q1. 現在の月々の電気代はおよそいくらですか？', opts:['3,000円未満','3,000〜6,000円','6,000〜10,000円','10,000〜15,000円','15,000〜20,000円','20,000円以上']},
+  {id:'family', q:'Q2. 家族構成は？', opts:['一人暮らし','2人（夫婦・カップル）','3〜4人家族','5人以上の大家族']},
+  {id:'dwelling', q:'Q3. 住居タイプは？', opts:['マンション・アパート（賃貸）','マンション（分譲）','一戸建て（賃貸）','一戸建て（持ち家）']},
+  {id:'peakTime', q:'Q4. 主に電気を使う時間帯は？', opts:['朝（6〜9時）と夜（18〜23時）が多い','日中（9〜18時）が多い（在宅ワーク等）','夜間（22時〜翌6時）が多い（夜型）','一日中まんべんなく使う']},
+  {id:'allElectric', q:'Q5. オール電化住宅ですか？', opts:['はい（給湯・調理すべて電気）','いいえ（ガスも使っている）','わからない']},
+  {id:'solar', q:'Q6. 太陽光発電を導入していますか？', opts:['していない','している（売電中）','導入を検討中']},
+  {id:'gasElec', q:'Q7. ガスと電気をセット契約したいですか？', opts:['はい（ガス電気セット割引を狙いたい）','いいえ（電気だけ変えたい）','どちらでもよい']},
+  {id:'priority', q:'Q8. 電力会社・プラン選びで最も重視するのは？', opts:['とにかく安さ（コスト削減）','環境（再生可能エネルギー）','サービス・ポイント還元','手続きの簡単さ','大手の安心感']},
+];
+
+let answers = {}, currentQ = 0;
+
+function renderQ() {
+  const q = QUESTIONS[currentQ];
+  document.getElementById('qNum').textContent = currentQ + 1;
+  const pct = Math.round(((currentQ + 1) / QUESTIONS.length) * 100);
+  document.getElementById('qPct').textContent = pct;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('backBtn').classList.toggle('hidden', currentQ === 0);
+  document.getElementById('questionContainer').innerHTML = `
+    <h2 class="text-lg font-bold text-gray-800 mb-4">${q.q}</h2>
+    <div class="space-y-2">
+      ${q.opts.map((opt, i) => `
+        <button onclick="selectOpt(${i})"
+          class="w-full text-left px-4 py-3 rounded-xl border-2 text-sm font-medium transition-all
+          ${answers[q.id] === i ? 'border-orange-500 bg-orange-50 text-orange-700' : 'border-gray-200 bg-gray-50 hover:border-orange-300 text-gray-700'}">
+          ${opt}
+        </button>`).join('')}
+    </div>`;
+}
+
+function selectOpt(i) { answers[QUESTIONS[currentQ].id] = i; renderQ(); }
+function prevQ() { if (currentQ > 0) { currentQ--; renderQ(); } }
+function nextQ() {
+  if (answers[QUESTIONS[currentQ].id] === undefined) { alert('選択してください'); return; }
+  if (currentQ < QUESTIONS.length - 1) { currentQ++; renderQ(); }
+  else showResult();
+}
+
+function showResult() {
+  document.getElementById('quizArea').classList.add('hidden');
+  document.getElementById('resultArea').classList.remove('hidden');
+
+  const bill = answers.bill; // 0-5
+  const peakTime = answers.peakTime; // 0-3
+  const allElec = answers.allElectric; // 0-2
+  const solar = answers.solar; // 0-2
+  const priority = answers.priority; // 0-4
+
+  let planType, planDesc, emoji, savingPct;
+
+  if (allElec === 0 || peakTime === 2) {
+    // オール電化 or 夜型
+    planType = '🌙 夜間割引型プラン（時間帯別料金）';
+    planDesc = '深夜電力が安くなるプランが最適です。電気給湯器・食洗機・洗濯乾燥機を夜間に回すことで大幅節約が可能。「スマートライフプラン」「深夜電力B」などが相当します。';
+    emoji = '🌙';
+    savingPct = 0.18;
+  } else if (priority === 1 || solar === 1) {
+    // 環境重視 or 太陽光あり
+    planType = '🌱 再生可能エネルギー型プラン';
+    planDesc = '環境への配慮と電気代削減を両立。太陽光発電との組み合わせで売電収入も最大化できます。「再エネ100%」「グリーン電力」などのプランを検討しましょう。';
+    emoji = '🌱';
+    savingPct = 0.08;
+  } else if (peakTime === 1) {
+    // 日中在宅
+    planType = '☀️ 日中割引型プラン（太陽光連動）';
+    planDesc = '日中の在宅ワークが多い場合は、昼間の電気代が安いプランが有利です。太陽光発電を導入している場合はさらに有利になります。';
+    emoji = '☀️';
+    savingPct = 0.12;
+  } else {
+    // 一般的
+    planType = '📊 フラット型プラン（新電力）';
+    planDesc = '時間帯に関わらず一定料金のシンプルなプランが最適。新電力会社（Looopでんき・東京ガス電力など）への乗り換えで基本料金の削減が見込めます。';
+    emoji = '📊';
+    savingPct = 0.10;
+  }
+
+  document.getElementById('rEmoji').textContent = emoji;
+  document.getElementById('planType').textContent = planType;
+  document.getElementById('planDesc').textContent = planDesc;
+
+  const billAmounts = [2000, 4500, 8000, 12500, 17500, 25000];
+  const monthlyBill = billAmounts[bill];
+  const yearlyBill = monthlyBill * 12;
+  const saving = Math.round(yearlyBill * savingPct / 1000) * 1000;
+
+  document.getElementById('rBadge').textContent = '年間約' + saving.toLocaleString() + '円節約見込み';
+  document.getElementById('rBadge').className = 'inline-block px-4 py-1 rounded-full text-sm font-bold mb-2 bg-green-100 text-green-700';
+  document.getElementById('savingAmount').textContent = '年間 約' + saving.toLocaleString() + '円';
+  document.getElementById('savingNote').textContent = `現在の電気代（月${monthlyBill.toLocaleString()}円 → 年${yearlyBill.toLocaleString()}円）から約${Math.round(savingPct * 100)}%削減の試算。実際の効果は使用量・地域・プランにより異なります。`;
+
+  const checks = [
+    '① 現在の電気料金明細（検針票）を用意する',
+    '② 比較サイト（エネルギー比較.com等）で複数プランを比較',
+    '③ 契約切替のタイミング（月の途中でも可能な場合が多い）を確認',
+    '④ 解約違約金がある場合は切替前に確認',
+    '⑤ スマートメーターへの交換（無料）が必要な場合あり',
+    '⑥ 切替後の初回請求書で節約効果を確認'
+  ];
+  document.getElementById('checkList').innerHTML = checks.map(c => `<p>• ${c}</p>`).join('');
+}
+
+function restart() {
+  answers = {}; currentQ = 0;
+  document.getElementById('resultArea').classList.add('hidden');
+  document.getElementById('quizArea').classList.remove('hidden');
+  renderQ();
+}
+
+renderQ();
+</script>
+</body>
+</html>
